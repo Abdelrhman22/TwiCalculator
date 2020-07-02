@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // container margins
     <dimen name="global_container_margin_top">20dp</dimen>
     <dimen name="global_container_margin_bottom">@dimen/global_container_margin_top</dimen>
     <dimen name="global_container_margin_right">15dp</dimen>
     <dimen name="global_container_margin_left">@dimen/global_container_margin_right</dimen>
 
+    // field margins
+    <dimen name="global_field_margin_top">20dp</dimen>
+    <dimen name="global_field_margin_bottom">@dimen/global_field_margin_top</dimen>
+    <dimen name="global_field_margin_right">@dimen/global_field_margin_top</dimen>
+    <dimen name="global_field_margin_left">@dimen/global_field_margin_top</dimen>
+    <dimen name="field_height">40dp</dimen>
+
+    // font size
+    <dimen name="result_font_size">25sp</dimen>
 </resources>

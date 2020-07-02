@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Calculator</string>
+    <string name="STR_RESULT">Result = &#160;</string>
+    <string name="STR_PLUS_OPERATOR">+</string>
+    <string name="STR_MINUS_OPERATOR">-</string>
+    <string name="STR_MULTIPLY_OPERATOR">*</string>
+    <string name="STR_DIVIDE_OPERATOR">/</string>
+    <string name="STR_EQUAL_OPERATOR">=</string>
+    <string name="STR_UNDO">Undo</string>
+    <string name="STR_REDO">Redo</string>
+    <string name="STR_HINT">Please enter the second operand </string>
+    <string name="STR_ERROR">Can\'t divide by zero </string>
 </resources>

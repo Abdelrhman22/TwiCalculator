@@ -4,15 +4,148 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/global_container_margin_top"
+    android:layout_marginBottom="@dimen/global_container_margin_bottom"
+    android:layout_marginEnd="@dimen/global_container_margin_right"
+    android:layout_marginStart="@dimen/global_container_margin_left"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0" />
+    <TextView
+        android:id="@+id/textView_result_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/STR_RESULT"
+        style="@style/STYLE_RESULT_LABEL"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        android:gravity="center_horizontal"
+        />
+    <TextView
+        android:id="@+id/textView_result_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        style="@style/STYLE_RESULT_VALUE"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView_result_label"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="@dimen/global_field_margin_left"
+        />
+    <TextView
+        android:id="@+id/textView_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/STR_ERROR"
+        style="@style/STYLE_RESULT_ERROR"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView_result_label"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="@dimen/global_field_margin_left"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:id="@+id/editText_operand_value"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/field_height"
+        app:layout_constraintTop_toBottomOf="@+id/textView_result_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="@dimen/global_field_margin_top"
+        android:hint="@string/STR_HINT"
+        android:background="@drawable/border"
+        android:gravity="center_horizontal|center_vertical"
+        android:inputType="number"
+        />
+
+    <LinearLayout
+        android:id="@+id/operations_container"
+        app:layout_constraintTop_toBottomOf="@+id/editText_operand_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/global_field_margin_top"
+        android:weightSum="4"
+        >
+        <Button
+            android:id="@+id/btn_plus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_PLUS_OPERATOR"
+            android:onClick="handleOperatorClick"
+            android:layout_marginEnd="@dimen/global_field_margin_right"
+            />
+        <Button
+            android:id="@+id/btn_minus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_MINUS_OPERATOR"
+            android:onClick="handleOperatorClick"
+            android:layout_marginEnd="@dimen/global_field_margin_right"
+            />
+        <Button
+            android:id="@+id/btn_multiply"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_MULTIPLY_OPERATOR"
+            android:onClick="handleOperatorClick"
+            android:layout_marginEnd="@dimen/global_field_margin_right"
+            />
+        <Button
+            android:id="@+id/btn_divide"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_DIVIDE_OPERATOR"
+            android:onClick="handleOperatorClick"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/extra_operations_container"
+        app:layout_constraintTop_toBottomOf="@+id/operations_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/global_field_margin_top"
+        android:weightSum="3"
+        >
+        <Button
+            android:id="@+id/btn_undo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_UNDO"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:layout_marginEnd="@dimen/global_field_margin_right"
+            />
+        <Button
+            android:id="@+id/btn_redo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_REDO"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:layout_marginEnd="@dimen/global_field_margin_right"
+            />
+        <Button
+            android:id="@+id/btn_equal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/STR_EQUAL_OPERATOR"
+            android:enabled="false"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
