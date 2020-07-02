@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="global_container_margin_top">20dp</dimen>
+    <dimen name="global_container_margin_bottom">@dimen/global_container_margin_top</dimen>
+    <dimen name="global_container_margin_right">15dp</dimen>
+    <dimen name="global_container_margin_left">@dimen/global_container_margin_right</dimen>
+
+</resources>
