@@ -14,10 +14,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private Context context;
     private List<OperationItem> operationItemList;
     private  LayoutInflater layoutInflater;
-    public ItemAdapter(Context context ,List<OperationItem> operationItemList){
+    private Updatable updatable;
+    public ItemAdapter(Context context ,List<OperationItem> operationItemList , Updatable updatable){
         this.context = context;
         this.operationItemList = operationItemList ;
         layoutInflater = LayoutInflater.from(context);
+        this.updatable = updatable;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -35,17 +37,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return operationItemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener{
         TextView operation , operand;
         public ViewHolder( View itemView) {
             super(itemView);
             operation = itemView.findViewById(R.id.textView_operation);
             operand = itemView.findViewById(R.id.textView_operand);
-
+            itemView.setOnClickListener(this);
         }
         public void  bindItem(OperationItem operationItem){
             operation.setText(Utils.getOperationAsString(operationItem.getOperation()));
             operand.setText(operationItem.getValue());
+        }
+
+        @Override
+        public void onClick(View v) {
+            OperationItem operationItem = operationItemList.get(getAdapterPosition());
+            updatable.update(operationItem);
         }
     }
 }

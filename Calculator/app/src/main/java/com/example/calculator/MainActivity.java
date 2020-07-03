@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Updatable{
 
     private TextView resultValue, errorTextView;
     private EditText secondOperandValue;
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             list.add(new OperationItem(operation, value, code));
             undoButton.setEnabled(true);
             if (adapter == null) {
-                adapter = new ItemAdapter(this, list);
+                adapter = new ItemAdapter(this, list , this);
                 previousOperationRecyclerView.setAdapter(adapter);
             } else
                 adapter.notifyDataSetChanged();
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             OperationItem item = list.get(index);
             redoList.add(item);
             list.remove(item);
-            if (list.size() == 0)
+            if (list!=null &&  list.size() == 0)
                 undoButton.setEnabled(false);
             adapter.notifyDataSetChanged();
             // reverse operation code
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             OperationItem item = redoList.get(index);
             list.add(item);
             redoList.remove(item);
-            if(redoList.size() ==0)
+            if(redoList!=null &&  redoList.size() ==0)
                 redoButton.setEnabled(false);
             adapter.notifyDataSetChanged();
             updateResult(Utils.getOperationByCode((item.getCode())),item.getValue());
@@ -170,5 +170,17 @@ public class MainActivity extends AppCompatActivity {
         double result = operation.calculate(firstOperand, Utils.parseDouble(value));
         resultValue.setVisibility(View.VISIBLE);
         resultValue.setText(String.valueOf(Utils.round(result, 2)));
+    }
+
+    @Override
+    public void update(OperationItem operationItem) {
+        redoButton.setEnabled(true);
+        redoList.add(operationItem);
+        list.remove(operationItem);
+        if (list!=null && list.size() == 0)
+            undoButton.setEnabled(false);
+        adapter.notifyDataSetChanged();
+        // reverse operation code
+        updateResult(Utils.getOperationByCode((operationItem.getCode() * -1)),operationItem.getValue());
     }
 }
