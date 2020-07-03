@@ -147,5 +147,27 @@
             android:enabled="false"
             />
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/previous_operations_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/extra_operations_container"
+        android:layout_marginTop="@dimen/global_field_margin_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/recyclerView_previous_operations"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         />
+     <TextView
+         android:id="@+id/textView_noHistory"
+         android:text="@string/STR_NO_HISTORY"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:visibility="gone"
+         />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,4 +10,5 @@
     <string name="STR_REDO">Redo</string>
     <string name="STR_HINT">Please enter the second operand </string>
     <string name="STR_ERROR">Can\'t divide by zero </string>
+    <string name="STR_NO_HISTORY">No History to show</string>
 </resources>
