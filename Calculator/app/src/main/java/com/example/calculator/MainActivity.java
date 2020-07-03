@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private int buttonID;
     private RecyclerView previousOperationRecyclerView;
     private List<OperationItem> list = new ArrayList<>();
+    private List<OperationItem> redoList = new ArrayList<>();
     private ItemAdapter adapter;
 
     @Override
@@ -105,11 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 result = 0.0;
         }
         secondOperandValue.setText("");
+        secondOperandValue.setEnabled(false);
         if (buttonID == R.id.btn_divide && secondOperand == 0) {
             errorTextView.setVisibility(View.VISIBLE);
             resultValue.setVisibility(View.GONE);
         } else {
             list.add(new OperationItem(operation, value, code));
+            undoButton.setEnabled(true);
             if (adapter == null) {
                 adapter = new ItemAdapter(this, list);
                 previousOperationRecyclerView.setAdapter(adapter);
@@ -133,5 +136,39 @@ public class MainActivity extends AppCompatActivity {
         buttonID = view.getId();
         secondOperandValue.setEnabled(true);
         //findViewById(buttonID).setBackground(getResources().getDrawable(R.drawable.button_selected));
+    }
+
+    public void handleButton(View view) {
+        int ClickedButton = view.getId();
+        if (ClickedButton == R.id.btn_undo) {
+            redoButton.setEnabled(true);
+            int index = list.size() - 1;
+            OperationItem item = list.get(index);
+            redoList.add(item);
+            list.remove(item);
+            if (list.size() == 0)
+                undoButton.setEnabled(false);
+            adapter.notifyDataSetChanged();
+            // reverse operation code
+            updateResult(Utils.getOperationByCode((item.getCode() * -1)),item.getValue());
+        }
+        else if(ClickedButton == R.id.btn_redo) {
+            undoButton.setEnabled(true);
+            int index = redoList.size() - 1;
+            OperationItem item = redoList.get(index);
+            list.add(item);
+            redoList.remove(item);
+            if(redoList.size() ==0)
+                redoButton.setEnabled(false);
+            adapter.notifyDataSetChanged();
+            updateResult(Utils.getOperationByCode((item.getCode())),item.getValue());
+        }
+    }
+
+    private void updateResult(Operation operation , String value) {
+        double firstOperand = getLastSavedResult();
+        double result = operation.calculate(firstOperand, Utils.parseDouble(value));
+        resultValue.setVisibility(View.VISIBLE);
+        resultValue.setText(String.valueOf(Utils.round(result, 2)));
     }
 }

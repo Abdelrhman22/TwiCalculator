@@ -127,6 +127,7 @@
             android:textAllCaps="false"
             android:enabled="false"
             android:layout_marginEnd="@dimen/global_field_margin_right"
+            android:onClick="handleButton"
             />
         <Button
             android:id="@+id/btn_redo"
@@ -137,6 +138,7 @@
             android:textAllCaps="false"
             android:enabled="false"
             android:layout_marginEnd="@dimen/global_field_margin_right"
+            android:onClick="handleButton"
             />
         <Button
             android:id="@+id/btn_equal"

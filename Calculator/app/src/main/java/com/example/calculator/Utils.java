@@ -23,7 +23,7 @@ public class Utils {
         return rounded.toString();
     }
 
-    public static Operation getOperation(int code){
+    public static Operation getOperationByCode(int code){
         Operation operation = Operation.PLUS;
         switch (code) {
             case 1:
