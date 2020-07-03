@@ -23,7 +23,7 @@
         android:text="@string/STR_RESULT"
         style="@style/STYLE_RESULT_LABEL"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="@id/guideline"
         android:gravity="center_horizontal"
         />
     <TextView
@@ -33,10 +33,10 @@
         android:text=""
         style="@style/STYLE_RESULT_VALUE"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/textView_result_label"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="@dimen/global_field_margin_left"
-        android:gravity="center_horizontal"
+        app:layout_constraintRight_toLeftOf="@+id/textView_result_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="@dimen/global_field_margin_left"
+        android:gravity="right"
         />
     <TextView
         android:id="@+id/textView_error"
@@ -45,9 +45,10 @@
         android:text="@string/STR_ERROR"
         style="@style/STYLE_RESULT_ERROR"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/textView_result_label"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="@dimen/global_field_margin_left"
+        app:layout_constraintRight_toLeftOf="@+id/textView_result_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="@dimen/global_field_margin_left"
+        android:gravity="right"
         android:visibility="gone"
         />
 
@@ -158,19 +159,19 @@
         android:layout_marginTop="@dimen/global_field_margin_top"
         app:layout_constraintBottom_toBottomOf="parent"
         >
-     <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/recyclerView_previous_operations"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         />
-     <TextView
-         android:id="@+id/textView_noHistory"
-         android:text="@string/STR_NO_HISTORY"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_centerInParent="true"
-         android:visibility="gone"
-         />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_previous_operations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/textView_noHistory"
+            android:text="@string/STR_NO_HISTORY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

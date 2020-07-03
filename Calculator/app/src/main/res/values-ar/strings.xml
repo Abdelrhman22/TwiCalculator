@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">الحـاسبة</string>
+    <string name="STR_RESULT">النتيجة = &#160;</string>
+    <string name="STR_PLUS_OPERATOR">+</string>
+    <string name="STR_MINUS_OPERATOR">-</string>
+    <string name="STR_MULTIPLY_OPERATOR">*</string>
+    <string name="STR_DIVIDE_OPERATOR">/</string>
+    <string name="STR_EQUAL_OPERATOR">=</string>
+    <string name="STR_UNDO">السابق</string>
+    <string name="STR_REDO">التالى</string>
+    <string name="STR_HINT">من فضلك ادخل الرقم الثانى </string>
+    <string name="STR_ERROR">لا يمكنك القسمة على صفر </string>
+    <string name="STR_NO_HISTORY">لا يوجد عمليات سابقة للعرض</string>
+</resources>

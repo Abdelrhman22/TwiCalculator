@@ -141,16 +141,8 @@ public class MainActivity extends AppCompatActivity implements Updatable{
     public void handleButton(View view) {
         int ClickedButton = view.getId();
         if (ClickedButton == R.id.btn_undo) {
-            redoButton.setEnabled(true);
-            int index = list.size() - 1;
-            OperationItem item = list.get(index);
-            redoList.add(item);
-            list.remove(item);
-            if (list!=null &&  list.size() == 0)
-                undoButton.setEnabled(false);
-            adapter.notifyDataSetChanged();
-            // reverse operation code
-            updateResult(Utils.getOperationByCode((item.getCode() * -1)),item.getValue());
+            OperationItem item = list.get(list.size()-1);
+            handleUndoEvent(item);
         }
         else if(ClickedButton == R.id.btn_redo) {
             undoButton.setEnabled(true);
@@ -165,6 +157,17 @@ public class MainActivity extends AppCompatActivity implements Updatable{
         }
     }
 
+    private void handleUndoEvent(OperationItem item) {
+        redoButton.setEnabled(true);
+        redoList.add(item);
+        list.remove(item);
+        if (list!=null &&  list.size() == 0)
+            undoButton.setEnabled(false);
+        adapter.notifyDataSetChanged();
+        // reverse operation code
+        updateResult(Utils.getOperationByCode((item.getCode() * -1)),item.getValue());
+    }
+
     private void updateResult(Operation operation , String value) {
         double firstOperand = getLastSavedResult();
         double result = operation.calculate(firstOperand, Utils.parseDouble(value));
@@ -174,13 +177,6 @@ public class MainActivity extends AppCompatActivity implements Updatable{
 
     @Override
     public void update(OperationItem operationItem) {
-        redoButton.setEnabled(true);
-        redoList.add(operationItem);
-        list.remove(operationItem);
-        if (list!=null && list.size() == 0)
-            undoButton.setEnabled(false);
-        adapter.notifyDataSetChanged();
-        // reverse operation code
-        updateResult(Utils.getOperationByCode((operationItem.getCode() * -1)),operationItem.getValue());
+        handleUndoEvent(operationItem);
     }
 }
