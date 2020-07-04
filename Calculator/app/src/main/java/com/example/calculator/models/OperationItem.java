@@ -1,4 +1,6 @@
-package com.example.calculator;
+package com.example.calculator.models;
+
+import com.example.calculator.Operation;
 
 public class OperationItem {
     private Operation operation;

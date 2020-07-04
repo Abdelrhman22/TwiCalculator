@@ -1,4 +1,6 @@
-package com.example.calculator;
+package com.example.calculator.utils;
+
+import com.example.calculator.Operation;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.calculator.models.OperationItem;
+import com.example.calculator.R;
+import com.example.calculator.interfaces.Updatable;
+import com.example.calculator.utils.Utils;
 
 import java.util.List;
 

@@ -36,7 +36,7 @@
         app:layout_constraintLeft_toRightOf="@+id/textView_result_label"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="@dimen/global_field_margin_left"
-        android:gravity="center_horizontal"
+        android:gravity="left"
         />
     <TextView
         android:id="@+id/textView_error"

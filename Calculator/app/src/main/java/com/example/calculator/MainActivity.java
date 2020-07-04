@@ -12,12 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.calculator.adapters.ItemAdapter;
+import com.example.calculator.interfaces.Updatable;
+import com.example.calculator.models.OperationItem;
+import com.example.calculator.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Updatable{
+public class MainActivity extends AppCompatActivity implements Updatable {
 
     private TextView resultValue, errorTextView;
     private EditText secondOperandValue;
@@ -140,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements Updatable{
 
     public void handleButton(View view) {
         int ClickedButton = view.getId();
+        errorTextView.setVisibility(View.GONE);
         if (ClickedButton == R.id.btn_undo) {
             OperationItem item = list.get(list.size()-1);
             handleUndoEvent(item);
@@ -177,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements Updatable{
 
     @Override
     public void update(OperationItem operationItem) {
+        // in case of user divide by zero before click item
+        errorTextView.setVisibility(View.GONE);
         handleUndoEvent(operationItem);
     }
 }
