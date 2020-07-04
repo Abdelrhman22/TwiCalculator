@@ -19,13 +19,14 @@ import com.example.calculator.models.OperationItem;
 import com.example.calculator.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Updatable {
 
     private TextView resultValue, errorTextView;
     private EditText secondOperandValue;
-    private Button undoButton, equalButton, redoButton;
+    private Button undoButton, equalButton, redoButton , plusButton , minusButton , multiplyButton , divideButton;
     private int buttonID;
     private RecyclerView previousOperationRecyclerView;
     private List<OperationItem> list = new ArrayList<>();
@@ -74,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements Updatable {
         previousOperationRecyclerView = findViewById(R.id.recyclerView_previous_operations);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         previousOperationRecyclerView.setLayoutManager(gridLayoutManager);
+        plusButton = findViewById(R.id.btn_plus);
+        minusButton = findViewById(R.id.btn_minus);
+        multiplyButton = findViewById(R.id.btn_multiply);
+        divideButton = findViewById(R.id.btn_divide);
     }
 
     private void handleEqualButton() {
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements Updatable {
         }
         secondOperandValue.setText("");
         secondOperandValue.setEnabled(false);
+        restButtonSelection();
         if (buttonID == R.id.btn_divide && secondOperand == 0) {
             errorTextView.setVisibility(View.VISIBLE);
             resultValue.setVisibility(View.GONE);
@@ -140,6 +146,36 @@ public class MainActivity extends AppCompatActivity implements Updatable {
         buttonID = view.getId();
         secondOperandValue.setEnabled(true);
         //findViewById(buttonID).setBackground(getResources().getDrawable(R.drawable.button_selected));
+        showUserSelectedButton(buttonID);
+    }
+
+    private void showUserSelectedButton(int buttonID) {
+            switch (buttonID){
+                case R.id.btn_plus:
+                    plusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_selected));
+                    minusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    multiplyButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    divideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    break;
+                case R.id.btn_minus:
+                    plusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    minusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_selected));
+                    multiplyButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    divideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    break;
+                case R.id.btn_multiply:
+                    plusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    minusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    multiplyButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_selected));
+                    divideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    break;
+                case R.id.btn_divide:
+                    plusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    minusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    multiplyButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+                    divideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_selected));
+                    break;
+            }
     }
 
     public void handleButton(View view) {
@@ -185,5 +221,12 @@ public class MainActivity extends AppCompatActivity implements Updatable {
         // in case of user divide by zero before click item
         errorTextView.setVisibility(View.GONE);
         handleUndoEvent(operationItem);
+    }
+
+    public void restButtonSelection(){
+        plusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+        minusButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+        multiplyButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
+        divideButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_normal));
     }
 }

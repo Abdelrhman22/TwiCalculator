@@ -17,5 +17,6 @@
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/textView_operation"
         tools:text="50"
+        android:textSize="18sp"
         />
 </RelativeLayout>
