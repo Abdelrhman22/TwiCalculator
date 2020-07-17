@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator.utils;
 
 public enum Operation {
     PLUS,
@@ -6,7 +6,7 @@ public enum Operation {
     MULTIPLY,
     DIVIDE;
 
-    double calculate(double x, double y) {
+    public double calculate(double x, double y) {
         switch (this) {
             case PLUS:
                 return x + y;

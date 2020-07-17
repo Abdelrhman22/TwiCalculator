@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,13 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.calculator.Calculations;
+import com.example.calculator.utils.Operation;
+import com.example.calculator.R;
 import com.example.calculator.adapters.ItemAdapter;
 import com.example.calculator.interfaces.Updatable;
 import com.example.calculator.models.OperationItem;
 import com.example.calculator.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Updatable {
@@ -90,23 +92,19 @@ public class MainActivity extends AppCompatActivity implements Updatable {
         String value = String.valueOf(secondOperand);
         switch (buttonID) {
             case R.id.btn_plus:
-                result = Operation.PLUS.calculate(firstOperand, secondOperand);
                 operation = Operation.PLUS;
                 code = Utils.PLUS_OPERATION_CODE;
                 break;
             case R.id.btn_minus:
-                result = Operation.MINUS.calculate(firstOperand, secondOperand);
                 operation = Operation.MINUS;
                 code = Utils.MINUS_OPERATION_CODE;
                 break;
             case R.id.btn_multiply:
-                result = Operation.MULTIPLY.calculate(firstOperand, secondOperand);
                 operation = Operation.MULTIPLY;
                 code = Utils.MULTIPLY_OPERATION_CODE;
                 break;
             case R.id.btn_divide:
                 if (secondOperand != 0) {
-                    result = Operation.DIVIDE.calculate(firstOperand, secondOperand);
                     operation = Operation.DIVIDE;
                     code = Utils.DIVIDE_OPERATION_CODE;
                     break;
@@ -121,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements Updatable {
             errorTextView.setVisibility(View.VISIBLE);
             resultValue.setVisibility(View.GONE);
         } else {
+            result = Calculations.handleOperation(firstOperand,operation,secondOperand);
             list.add(new OperationItem(operation, value, code));
             undoButton.setEnabled(true);
             if (adapter == null) {
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements Updatable {
 
     private void updateResult(Operation operation , String value) {
         double firstOperand = getLastSavedResult();
-        double result = operation.calculate(firstOperand, Utils.parseDouble(value));
+        double result = Calculations.handleOperation(firstOperand,operation,Utils.parseDouble(value));
         resultValue.setVisibility(View.VISIBLE);
         resultValue.setText(String.valueOf(Utils.round(result, 2)));
     }

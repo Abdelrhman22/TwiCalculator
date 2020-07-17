@@ -8,7 +8,7 @@
     android:layout_marginBottom="@dimen/global_container_margin_bottom"
     android:layout_marginEnd="@dimen/global_container_margin_right"
     android:layout_marginStart="@dimen/global_container_margin_left"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

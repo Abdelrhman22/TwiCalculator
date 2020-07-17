@@ -1,7 +1,5 @@
 package com.example.calculator.utils;
 
-import com.example.calculator.Operation;
-
 import java.math.BigDecimal;
 
 public class Utils {
