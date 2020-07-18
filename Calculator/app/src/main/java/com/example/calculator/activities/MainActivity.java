@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements Updatable {
             handleUndoEvent(item);
         }
         else if(ClickedButton == R.id.btn_redo) {
+            updateResult(Calculations.handleRedo(getLastSavedResult(),redoList));
             undoButton.setEnabled(true);
             int index = redoList.size() - 1;
             OperationItem item = redoList.get(index);
@@ -193,24 +194,20 @@ public class MainActivity extends AppCompatActivity implements Updatable {
             if(redoList!=null &&  redoList.size() ==0)
                 redoButton.setEnabled(false);
             adapter.notifyDataSetChanged();
-            updateResult(Utils.getOperationByCode((item.getCode())),item.getValue());
         }
     }
 
     private void handleUndoEvent(OperationItem item) {
+        updateResult(Calculations.handleUndo(getLastSavedResult(),list));
         redoButton.setEnabled(true);
         redoList.add(item);
         list.remove(item);
         if (list!=null &&  list.size() == 0)
             undoButton.setEnabled(false);
         adapter.notifyDataSetChanged();
-        // reverse operation code
-        updateResult(Utils.getOperationByCode((item.getCode() * -1)),item.getValue());
     }
 
-    private void updateResult(Operation operation , String value) {
-        double firstOperand = getLastSavedResult();
-        double result = Calculations.handleOperation(firstOperand,operation,Utils.parseDouble(value));
+    private void updateResult(double result) {
         resultValue.setVisibility(View.VISIBLE);
         resultValue.setText(String.valueOf(Utils.round(result, 2)));
     }
